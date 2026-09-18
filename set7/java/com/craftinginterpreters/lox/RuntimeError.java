@@ -1,5 +1,7 @@
 package com.craftinginterpreters.lox;
 
-public class RuntimeError {
+class RuntimeError extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+    final Token token;
     
 }
