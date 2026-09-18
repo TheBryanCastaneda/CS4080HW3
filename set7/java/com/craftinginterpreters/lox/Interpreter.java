@@ -115,6 +115,25 @@ public Object visitConditionalExpr(Expr.Conditional expr) {
         if (object == null) {
             return false;
         }
-    }
     
+    
+    if (object instanceof Boolean) {
+        return (boolean)object;
+    }
+
+    return true;
 }
+
+private boolean isEqual(Object left, Object right) {
+    if (left == null && right == null) {
+        return true;
+    }
+
+    if (left == null) {
+        return false;
+    }
+
+    return left.equals(right);
+}
+
+
