@@ -61,6 +61,31 @@ class Interpreter  implements Expr.Visitor<Object> {
                 checkNumberOperands(expr.operator, left, right);
                 return (double)left / (double)right;
 
-            case
+            case STAR:
+                checkNumberOperands(expr.operator, left, right);
+                return (double)left * (double)right;
+
+            case COMMA:
+                return right;
+
+            default:
+                return null;
         }
+}
+
+@Override
+public Object visitConditionalExpr(Expr.Conditional expr) {
+    if (isTruthy(evaluate(expr.condition))) {
+        return evaluate(expr.thenBranch);
+    }
+
+    return evaluate(expr.elseBranch);
+    }
+
+    @Override
+    public Object visitGroupingExpr(Expr.Grouping expr) {
+        return evaluate(expr.expression);
+    }
+
+    
 }
