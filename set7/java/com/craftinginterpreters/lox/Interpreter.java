@@ -1,5 +1,13 @@
 package com.craftinginterpreters.lox;
 
-public class Interpreter {
+class Interpreter  implements Expr.Visitor<Object> {
+    void interpret(Expr expression) {
+        try {
+            Object value = evaluate(expression);
+            System.out.println(stringify(value));
+        } catch (RuntimeError error) {
+            Lox.runtimeError(error);
+        }
+    }
     
 }
